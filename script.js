@@ -41,9 +41,15 @@ const getWeather = function (city) {
 submit.addEventListener("click", (e) => {
   e.preventDefault();
   getWeather(city.value);
+  city.value = "";
 });
 
 getWeather("Nagpur");
+
+// DropDown Funcnality
+document.querySelectorAll(".dropdown-item").forEach(function (item) {
+  item.addEventListener("click", (e) => getWeather(e.target.innerHTML));
+});
 
 // Delhi
 fetch(
