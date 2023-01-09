@@ -40,7 +40,11 @@ const getWeather = function (city) {
 
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  getWeather(city.value);
+  if (city.value == "undefined" || city.value == null || city.value == "") {
+    alert("wrong input");
+  } else {
+    getWeather(city.value);
+  }
   city.value = "";
 });
 
