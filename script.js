@@ -15,6 +15,11 @@ const getWeather = function (city) {
     .then((response) => response.json())
     .then((response) => {
       console.log(response);
+      // To check Input Validation (Temp)
+      if(response.temp==undefined){
+        alert('Invalid input..!! Your input is not a valid City')
+        getWeather('Nagpur')
+      }
       // cloud_pct.innerHTML = response.cloud_pct;
       temp.innerHTML = response.temp;
       feels_like.innerHTML = response.feels_like;
@@ -32,22 +37,24 @@ const getWeather = function (city) {
       temp_head.innerHTML = response.temp;
       humidity_head.innerHTML = response.humidity;
       wind_head.innerHTML = response.wind_speed;
-      // console.log(response.sunrise);
-      // console.log(response.sunset);
     })
     .catch((err) => console.error(err));
 };
 
+
+// Stting Search box-Submit btn
 submit.addEventListener("click", (e) => {
   e.preventDefault();
-  if (city.value == "undefined" || city.value == null || city.value == "") {
-    alert("wrong input");
-  } else {
+  // Check SearchBox input Validation
+  if (city.value == "undefined" || city.value == null || city.value == ""||city.value=='NaN') {
+    alert("Please input a valid City");
+  } else if(city.value==Number(city.value)||city.value=='zero'||city.value=='Zero'){
+    alert("Please input a valid City");
+  }else{
     getWeather(city.value);
   }
   city.value = "";
 });
-
 getWeather("Nagpur");
 
 // DropDown Funcnality
@@ -55,7 +62,8 @@ document.querySelectorAll(".dropdown-item").forEach(function (item) {
   item.addEventListener("click", (e) => getWeather(e.target.innerHTML));
 });
 
-// Delhi
+// Weather of other Citis-
+// 01-Delhi
 fetch(
   `https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=Delhi`,
   options
@@ -79,7 +87,7 @@ fetch(
   })
   .catch((err) => console.error(err));
 
-// Bengaluru
+// 02-Bengaluru
 fetch(
   `https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=bengaluru`,
   options
@@ -103,7 +111,7 @@ fetch(
   })
   .catch((err) => console.error(err));
 
-//Kolkata
+// 03-Kolkata
 fetch(
   `https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=kolkata`,
   options
@@ -127,7 +135,7 @@ fetch(
   })
   .catch((err) => console.error(err));
 
-// Mumbai
+// 04-Mumbai
 fetch(
   `https://weather-by-api-ninjas.p.rapidapi.com/v1/weather?city=mumbai`,
   options
